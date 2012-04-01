@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  opt1: MyString
+  opt2: MyString
+  opt1_ac: 1
+  opt2_ac: 1
+
+two:
+  opt1: MyString
+  opt2: MyString
+  opt1_ac: 1
+  opt2_ac: 1

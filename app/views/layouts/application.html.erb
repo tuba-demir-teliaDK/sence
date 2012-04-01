@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>sence?</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="<%= root_url%>">
+              sence?
+            </a>
+        	<%- if !current_user.nil? %>
+             <ul class="nav">
+				<li><%=link_to "Users", questions_path %></li>
+				<li><%=link_to "Questions", questions_path %></li>
+				<li><%=link_to "Answers", answers_path %></li>
+			</ul>  
+			<%- end -%>
+        </div>
+      </div>
+	</div>
+	
+	<div class="container">
+	    <%- if !notice.nil? or !alert.nil? -%>
+		    <div class="alert alert-block">
+			 	<a class="close" data-dismiss="alert">×</a>
+				 <%= notice %>
+				 <%= alert %>
+			</div>
+		<%- end -%>
+		
+		<%= yield %>
+	<div>
+
+</div>	
+<!-- <%= debug(params) if Rails.env.development? %> -->
+</body>
+</html>
+</html>
