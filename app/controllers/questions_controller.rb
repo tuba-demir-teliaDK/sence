@@ -41,6 +41,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
+    @question.user_id=current_user
 
     respond_to do |format|
       if @question.save
