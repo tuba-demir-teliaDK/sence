@@ -40,8 +40,9 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
+    @user = User.find(current_user)
     @question = Question.new(params[:question])
-    @question.user_id=current_user
+    @question.user_id=@user.id
 
     respond_to do |format|
       if @question.save
