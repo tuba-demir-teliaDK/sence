@@ -1,6 +1,9 @@
 <div class="hero-unit">
   <h1>sence?dashboard</h1>
   <p>
+  	
+    <%= link_to "new question", new_question_path, :class=>'btn btn-large' %>
+    <%= link_to "random question", random_questions_path, :class=>'btn btn-large' %>
     <%= link_to "sign out", destroy_user_session_path, :method => :delete, :class=>'btn btn-large' %>
   </p>
 

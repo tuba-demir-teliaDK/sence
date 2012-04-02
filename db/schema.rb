@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120402124849) do
+ActiveRecord::Schema.define(:version => 20120402182212) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(:version => 20120402124849) do
     t.string   "opt2"
     t.integer  "opt1_ac",    :default => 0
     t.integer  "opt2_ac",    :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.integer  "user_id"
-    t.integer  "status",     :default => 0
+    t.string   "status",     :default => "waiting_approval"
   end
 
+  add_index "questions", ["opt1", "opt2"], :name => "index_questions_on_opt1_and_opt2", :unique => true
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "users", :force => true do |t|

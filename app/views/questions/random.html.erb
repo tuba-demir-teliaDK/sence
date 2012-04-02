@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+ <%= @question.id %>
+<p>
+  <b>Opt1:</b>
+  <%= @question.opt1 %>
+</p>
+
+<p>
+  <b>Opt2:</b>
+  <%= @question.opt2 %>
+</p>
+
+<%= link_to 'Next Random', random_questions_path %>

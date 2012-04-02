@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
     redirect_to home_url, :alert => exception.message
   end
   
+  def current_uri
+    request.env['PATH_INFO']
+  end
+  
 end

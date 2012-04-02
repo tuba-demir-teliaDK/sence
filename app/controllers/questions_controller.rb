@@ -2,7 +2,6 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    current_uri = request.env['PATH_INFO']
     
     if current_uri.include?('mine')
       @user=User.find(current_user)
@@ -89,8 +88,23 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url }
+      if current_uri.include?('mine')
+        format.html { redirect_to mine_questions_url }
+      else
+        format.html { redirect_to questions_url }
+      end
+      
       format.json { head :no_content }
     end
   end
+  
+   def random
+    @question = Question.random
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @question }
+    end
+  end
+  
 end
