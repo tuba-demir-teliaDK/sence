@@ -9,7 +9,11 @@ Sence::Application.routes.draw do
     end
   end
 
-  devise_for :users
+  devise_for :users 
+  
+  resources :users do
+    resources :questions
+  end
 
   match 'logout' => 'devise/session#destroy'
   # The priority is based upon order of creation:

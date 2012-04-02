@@ -1,23 +1,22 @@
 <div class="hero-unit">
   <h1>sence?dashboard</h1>
   <p>
-    <%= link_to "sign in", new_user_session_path, :class=>'btn btn-large' %>
     <%= link_to "sign out", destroy_user_session_path, :method => :delete, :class=>'btn btn-large' %>
   </p>
 
-  <b>total question count: <%= @totalcount %></b>
-  <table class="table table-condensed">
+  <b><%= @question_count %></b> questions,
+  <b><%= @answer_count %></b> answers and 
+  <b><%= @user_count %></b> users
+</div>
+ <table class="table table-condensed">
   <tr>
     <th>User</th>
     <th>Question Count</th>
   </tr>
   	<% @questions.each do |question| %>
 	  <tr>
-	    <td><%= question.email %></td>
-	    <td><%= question.cnt %></td>
+	    <td><%= link_to question.email, user_questions_path(question.user_id) %></td>
+	    <td><%= link_to question.cnt, user_questions_path(question.user_id) %></td>
 	  </tr>
 	<% end %>
 </table>
-
-</div>
-

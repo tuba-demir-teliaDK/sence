@@ -7,6 +7,9 @@ class QuestionsController < ApplicationController
     if current_uri.include?('mine')
       @user=User.find(current_user)
       @questions = @user.questions
+    elsif params[:user_id]
+      @user=User.find(params[:user_id])
+      @questions = @user.questions
     else
       @questions = Question.all
     end
