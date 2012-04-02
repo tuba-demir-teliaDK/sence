@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    current_uri = request.env['PATH_INFO']
+    
     
     if current_uri.include?('mine')
       @user=User.find(current_user)

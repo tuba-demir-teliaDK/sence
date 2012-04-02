@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to home_url, :alert => exception.message
   end
+  
+  def current_uri
+    request.env['PATH_INFO']
+  end
+  
 end

@@ -10,6 +10,7 @@
     <th>Opt1 count</th>
     <th>Opt2 count</th>
     <th>created by</th>
+    <th>status</th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,6 +24,7 @@
     <td><%= question.opt1_ac %></td>
     <td><%= question.opt2_ac %></td>
     <td><%= question.user_email %></td>
+    <td><%= question.status %></td>
     <td><%= link_to 'Show', question %></td>
     <td><%= link_to 'Edit', edit_question_path(question) %></td>
     <td><%= link_to 'Destroy', question, confirm: 'Are you sure musun?', method: :delete %></td>
