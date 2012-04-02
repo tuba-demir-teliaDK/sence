@@ -1,5 +1,7 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   
-  delegate :email, :to => :user, :prefix => true
+  def user_email
+    self.user.email if !self.user.nil?
+  end
 end
