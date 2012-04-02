@@ -2,7 +2,15 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    current_uri = request.env['PATH_INFO']
+    
+    if current_uri.include?('mine')
+      @user=User.find(current_user)
+      @questions = @user.questions
+    else
+      @questions = Question.all
+    end
+    
 
     respond_to do |format|
       format.html # index.html.erb

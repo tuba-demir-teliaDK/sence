@@ -3,11 +3,15 @@ Sence::Application.routes.draw do
   
   resources :answers
 
-  resources :questions
+  resources :questions do 
+    collection do
+      get 'mine' => 'questions#index'
+    end
+  end
 
   devise_for :users
 
-   match 'logout' => 'devise/session#destroy'
+  match 'logout' => 'devise/session#destroy'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
