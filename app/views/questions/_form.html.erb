@@ -12,23 +12,22 @@
   <% end %>
 <br />
   <div class="field">
-    Seçenek 1:<%= f.text_field :opt1 %>
+    <%= f.text_field :opt1, :class=>"span3", :placeholder=>"Seçenek 1..." %>
   	<%= f.file_field :opt1_image %>
   </div>
   <div class="field">
-    Seçenek 2:
-    <%= f.text_field :opt2 %>
+    <%= f.text_field :opt2,:class=>"span3" , :placeholder=>"Seçenek 2...…"%>
 	<%= f.file_field :opt2_image %>
   </div>
   <div class="field">
     Option1 count<br />
-    <%= f.number_field :opt1_ac %>
+    <%= f.number_field :opt1_ac,:class=>"span2" %>
   </div>
   <div class="field">
     Option2 count<br />
-    <%= f.number_field :opt2_ac %>
+    <%= f.number_field :opt2_ac,:class=>"span2" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class=>"btn btn-primary" %>
   </div>
 <% end %>
