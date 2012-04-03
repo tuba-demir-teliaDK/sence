@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   
-  #authorizations
+   #authorizations
   ROLES = %w[admin moderator author banned]
   
   def roles=(roles)
