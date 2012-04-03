@@ -10,14 +10,15 @@
       </ul>
     </div>
   <% end %>
-
+<br />
   <div class="field">
-    <%= f.label :opt1 %><br />
-    <%= f.text_field :opt1 %>
+    Seçenek 1:<%= f.text_field :opt1 %>
+  	<%= f.file_field :opt1_image %>
   </div>
   <div class="field">
-    <%= f.label :opt2 %><br />
+    Seçenek 2:
     <%= f.text_field :opt2 %>
+	<%= f.file_field :opt2_image %>
   </div>
   <div class="field">
     Option1 count<br />

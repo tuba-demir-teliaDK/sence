@@ -1,24 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Opt1:</b>
-  <%= @question.opt1 %>
-</p>
-
-<p>
-  <b>Opt2:</b>
-  <%= @question.opt2 %>
-</p>
-
-<p>
-  <b>Opt1 ac:</b>
-  <%= @question.opt1_ac %>
-</p>
-
-<p>
-  <b>Opt2 ac:</b>
-  <%= @question.opt2_ac %>
-</p>
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="span6">
+		  <%= @question.opt1 %>-<b><%= @question.opt1_ac %></b><br />
+		  <%= image_tag @question.opt1_image.url(:medium) %>
+      </div>
+      <div class="span6">
+		  <%= @question.opt2 %>-<b><%= @question.opt2_ac %></b><br />
+		  <%= image_tag @question.opt2_image.url(:medium) %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <%= link_to 'Edit', edit_question_path(@question) %> |

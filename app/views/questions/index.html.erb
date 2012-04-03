@@ -6,6 +6,7 @@
   <tr>
     <th>ID</th>
     <th>Opt1</th>
+    <th></th>
     <th>Opt2</th>
     <th>Opt1 count</th>
     <th>Opt2 count</th>
@@ -20,7 +21,9 @@
   <tr>
     <td><%= question.id %></td>
     <td><%= question.opt1 %></td>
+    <td><%= image_tag question.opt1_image.url(:thumb) %></td>
     <td><%= question.opt2 %></td>
+    <td><%= image_tag question.opt2_image.url(:thumb) %></td>
     <td><%= question.opt1_ac %></td>
     <td><%= question.opt2_ac %></td>
     <td><%= question.user_email %></td>
