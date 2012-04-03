@@ -2,8 +2,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
   
   before_save :capitalize_fields
-  has_attached_file :opt1_image, :styles => { :medium => "200x200>", :thumb => "32x32>" }
-  has_attached_file :opt2_image, :styles => { :medium => "200x200>", :thumb => "32x32>" }
+  has_attached_file :opt1_image, :styles => { :medium => "180x180>", :thumb => "32x32>" }
+  has_attached_file :opt2_image, :styles => { :medium => "180x180>", :thumb => "32x32>" }
   
   STATUSES = %w(waiting_approval approved deleted)
   
