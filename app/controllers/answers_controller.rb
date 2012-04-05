@@ -41,17 +41,31 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(params[:answer])
-
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render json: @answer, status: :created, location: @answer }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
+    
+    @answer.user_id=current_user
+    
+    @question = Question.find(@answer.question_id)
+    
+    if @answer.opt==1
+      @question.opt1_ac= (@question.opt1_ac).to_i + 1
+    else
+      @question.opt2_ac= (@question.opt2_ac).to_i + 1
     end
-  end
+    
+    
+    respond_to do |format|
+      ActiveRecord::Base.transaction do
+        @answer.save!
+        @question.save!
+       format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.json { render json: @answer, status: :created, location: @answer }
+      end      
+    end
+    
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
+      format.html { render action: "new" }
+        format.json { render json: @answer.errors, status: :unprocessable_entity }
+   end
 
   # PUT /answers/1
   # PUT /answers/1.json

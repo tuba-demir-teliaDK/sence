@@ -30,6 +30,15 @@ class QuestionsController < ApplicationController
       format.json { render json: @question }
     end
   end
+  
+  def stats
+    @question=Question.find(params[:id])
+    
+    respond_to do |format|
+      format.json{render json:@question.to_json(:only=>[:opt1_ac,:opt2_ac])}
+    end
+    
+  end
 
   # GET /questions/new
   # GET /questions/new.json

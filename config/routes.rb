@@ -8,6 +8,9 @@ Sence::Application.routes.draw do
       get 'mine' => 'questions#index'
       get 'random'
     end
+    member do
+      get 'stats'
+    end
   end
 
   devise_for :users 
