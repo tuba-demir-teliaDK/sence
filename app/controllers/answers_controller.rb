@@ -41,9 +41,7 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(params[:answer])
-    
     @answer.user_id=current_user
-    
     @question = Question.find(@answer.question_id)
     
     if @answer.opt==1
@@ -52,13 +50,12 @@ class AnswersController < ApplicationController
       @question.opt2_ac= (@question.opt2_ac).to_i + 1
     end
     
-    
     respond_to do |format|
       ActiveRecord::Base.transaction do
         @answer.save!
         @question.save!
-       format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render json: @answer, status: :created, location: @answer }
+        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.json { render json: @question.to_json(:only=> [:opt1_ac,:opt2_ac]), status: :created, location: @answer }
       end      
     end
     
