@@ -2,8 +2,10 @@
   <h1>sence?dashboard</h1>
   <p>
   	
-    <%= link_to "new question", new_question_path, :class=>'btn btn-large btn-primary' %>
-    <%= link_to "random question", random_questions_path, :class=>'btn btn-large' %>
+    <%= link_to "<i class='icon-question-sign icon-white'></i> #{t('New Question')}".html_safe, new_question_path, :class=>'btn btn-large btn-primary' %>
+    <%= link_to "<i class='icon-random icon-white'></i> #{t('Random Question')}".html_safe, random_questions_path, :class=>'btn btn-large btn-success' %>
+    <%= link_to "<i class='icon-star icon-white'></i> #{t('My Questions')}".html_safe, mine_questions_path, :class=>'btn btn-large btn-warning' %>
+    <%= link_to "<i class='icon-user icon-white'></i> #{t('Users')}".html_safe, users_path, :class=>'btn btn-large btn-info' %>
     <%= link_to "sign out", destroy_user_session_path, :method => :delete, :class=>'btn btn-large' %>
   </p>
 
