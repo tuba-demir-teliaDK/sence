@@ -6,6 +6,8 @@ class QuestionsController < ApplicationController
     if current_uri.include?('mine')
       @user=User.find(current_user)
       @questions = @user.questions
+    elsif current_uri.include?('nopicture')
+      @questions = Question.nopicture
     elsif params[:user_id]
       @user=User.find(params[:user_id])
       @questions = @user.questions

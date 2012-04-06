@@ -6,6 +6,7 @@ Sence::Application.routes.draw do
   resources :questions do 
     collection do
       get 'mine' => 'questions#index'
+      get 'nopicture' => 'questions#index'
       get 'random'
     end
     member do
