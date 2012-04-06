@@ -108,7 +108,9 @@ class QuestionsController < ApplicationController
   end
   
    def random
-    @question = Question.random
+    @question = Question.fresh(current_user).random
+    
+    puts @question
 
     respond_to do |format|
       format.html # show.html.erb

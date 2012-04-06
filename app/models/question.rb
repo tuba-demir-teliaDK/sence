@@ -15,6 +15,8 @@ class Question < ActiveRecord::Base
     self.user.email if !self.user.nil?
   end
   
+  scope :fresh, lambda { |user| joins('left outer join answers on questions.id=answers.question_id').where(['answers.user_id is null or answers.user_id != ?',user.id]) }
+  
   def capitalize_fields
     self.opt1=UnicodeUtils.titlecase(self.opt1)
     self.opt2=UnicodeUtils.titlecase(self.opt2)
