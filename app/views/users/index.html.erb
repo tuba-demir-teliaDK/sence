@@ -5,6 +5,9 @@
     <th>ID</th>
     <th>email</th>
     <th>apple_id</th>
+    <th>create date</th>
+    <th>update date</th>
+    <th>last signin date</th>
     <th></th>
   </tr>
 
@@ -13,6 +16,9 @@
     <td><%= user.id %></td>
     <td><%= user.email %> </td>
     <td><%= user.apple_id %></td>
+    <td><%= user.created_at %></td>
+    <td><%= user.updated_at %></td>
+    <td><%= user.last_sign_in_at %></td>
     <td><%= link_to 'Show', user %></td>
   </tr>
 <% end %>

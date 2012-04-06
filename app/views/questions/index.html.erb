@@ -14,6 +14,7 @@
     <th></th>
     <th>created by</th>
     <th>status</th>
+    <th>created_at</th>
     <th></th>
   </tr>
 </thead>
@@ -30,6 +31,7 @@
     <td><%= image_tag question.opt2_image.url(:thumb) %> </td>
     <td><%= question.user_email %> </td>
     <td> WA </td>
+    <td><%= question.created_at %> </td>
     <td><%= link_to 'Show', question %> | <%= link_to 'Edit', edit_question_path(question) %> | <%= link_to 'Destroy', question, confirm: 'Are you sure musun?', method: :delete %></td>
   </tr>
 <% end %>
