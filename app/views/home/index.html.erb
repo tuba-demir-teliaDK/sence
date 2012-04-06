@@ -16,10 +16,10 @@
     <th>User</th>
     <th>Question Count</th>
   </tr>
-  	<% @questions.each do |question| %>
+  	<% @user_questions.each do |user_question| %>
 	  <tr>
-	    <td><%= link_to question.email, user_questions_path(question.user_id) %></td>
-	    <td><%= link_to question.cnt, user_questions_path(question.user_id) %></td>
+	    <td><%= link_to user_question.email, user_questions_path(user_question.user_id) %></td>
+	    <td><%= link_to user_question.cnt, user_questions_path(user_question.user_id) %></td>
 	  </tr>
 	<% end %>
 </table>
