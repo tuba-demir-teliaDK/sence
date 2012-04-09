@@ -111,7 +111,9 @@ class QuestionsController < ApplicationController
   
    def random
     @user = User.find(current_user)
-    @question = Question.fresh(@user).random
+    @question = Question.fresh(@user).active.random
+    
+    puts @question
     
     respond_to do |format|
       format.html # show.html.erb

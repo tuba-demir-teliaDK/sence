@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   has_attached_file :opt1_image, :styles => { :medium => "180x180>", :thumb => "32x32>" },:default_url => '/assets/missing.png'
   has_attached_file :opt2_image, :styles => { :medium => "180x180>", :thumb => "32x32>" },:default_url => '/assets/missing.png'
   
-  STATUSES = %w(waiting_approval approved deleted)
+  STATUSES = %w(wapproval approved deleted)
   
   validates_uniqueness_of :opt1, :scope => [:opt2]
   validates_presence_of :status , :opt1, :opt2
@@ -16,6 +16,7 @@ class Question < ActiveRecord::Base
   end
   
   scope :nopicture, where('opt1_image_file_name is null or opt2_image_file_name is null')
+  scope :active, where("status='approved'")
   scope :fresh, lambda { |user| joins('left outer join answers on questions.id=answers.question_id').where(['answers.user_id is null or answers.user_id != ?',user.id]) }
   
   def capitalize_fields
