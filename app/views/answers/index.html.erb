@@ -5,6 +5,7 @@
     <th>Question</th>
     <th>Opt</th>
     <th>User</th>
+    <th>Created At</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,7 @@
     <td><%= answer.question_id %></td>
     <td><%= answer.opt %></td>
     <td><%= answer.user_id %></td>
+    <td><%= answer.created_at %></td>
     <td><%= link_to 'Show', answer %></td>
     <td><%= link_to 'Edit', edit_answer_path(answer) %></td>
     <td><%= link_to 'Destroy', answer, confirm: 'Are you sure?', method: :delete %></td>
