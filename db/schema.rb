@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403115636) do
+ActiveRecord::Schema.define(:version => 20120409155027) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -21,15 +21,17 @@ ActiveRecord::Schema.define(:version => 20120403115636) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
   create_table "questions", :force => true do |t|
     t.string   "opt1"
     t.string   "opt2"
     t.integer  "opt1_ac",                 :default => 0
     t.integer  "opt2_ac",                 :default => 0
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "user_id"
-    t.string   "status",                  :default => "waiting_approval"
+    t.string   "status",                  :default => "wapproval"
     t.string   "opt1_image_file_name"
     t.string   "opt1_image_content_type"
     t.integer  "opt1_image_file_size"
@@ -41,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120403115636) do
   end
 
   add_index "questions", ["opt1", "opt2"], :name => "index_questions_on_opt1_and_opt2", :unique => true
+  add_index "questions", ["status"], :name => "index_questions_on_status"
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "users", :force => true do |t|
