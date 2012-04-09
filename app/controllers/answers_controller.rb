@@ -41,7 +41,8 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(params[:answer])
-    @answer.user_id=current_user
+    @user = User.find(current_user)
+    @answer.user_id=@user.id
     @question = Question.find(@answer.question_id)
     
     if @answer.opt==1

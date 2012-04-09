@@ -112,8 +112,6 @@ class QuestionsController < ApplicationController
    def random
     @question = Question.fresh(current_user).random
     
-    puts @question
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @question }
