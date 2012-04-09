@@ -8,6 +8,7 @@ Sence::Application.routes.draw do
       get 'mine' => 'questions#index'
       get 'nopicture' => 'questions#index'
       get 'random'
+      get 'wapproval' => 'questions#index'
     end
     member do
       get 'stats'

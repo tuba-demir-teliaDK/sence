@@ -8,6 +8,8 @@ class QuestionsController < ApplicationController
       @questions = @user.questions
     elsif current_uri.include?('nopicture')
       @questions = Question.nopicture
+    elsif current_uri.include?('wapproval')
+      @questions = Question.all_wapproval
     elsif params[:user_id]
       @user=User.find(params[:user_id])
       @questions = @user.questions
