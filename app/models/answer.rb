@@ -5,4 +5,6 @@ class Answer < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :question
   
+  default_scope :order => 'created_at desc'
+  
 end
