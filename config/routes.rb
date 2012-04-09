@@ -12,7 +12,6 @@ Sence::Application.routes.draw do
     end
     member do
       get 'stats'
-      post :approve
     end
   end
 
