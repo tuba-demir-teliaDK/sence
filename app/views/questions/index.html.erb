@@ -32,7 +32,12 @@
     <td><%= question.user_email %> </td>
     <td><%= question.user_email %> </td>
     <td><%= question.status %> </td>
-    <td><%= link_to 'Show', question %> | <%= link_to 'Edit', edit_question_path(question) %> | <%= link_to 'Destroy', question, confirm: 'Are you sure musun?', method: :delete %></td>
+    <td><%= link_to 'Show', question %> | <%= link_to 'Edit', edit_question_path(question) %> | 
+    	<%= link_to 'Destroy', question, confirm: 'Are you sure musun?', method: :delete %> | 
+    	<%- if question.status=='wapproval'%>
+    	<%= link_to 'Approve', question, method: :approve %>
+    	<%- end %>
+    	</td>
   </tr>
 <% end %>
 </tbody>

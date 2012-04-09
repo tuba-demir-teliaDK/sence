@@ -1,4 +1,7 @@
 class SessionsController < Devise::SessionsController
+  prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
+  prepend_before_filter :allow_params_authentication!, :only => :create
+  
   def create
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?

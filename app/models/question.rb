@@ -24,6 +24,10 @@ class Question < ActiveRecord::Base
     self.opt2=UnicodeUtils.titlecase(self.opt2)
   end
   
+  def approve
+    self.update_attribute(:status,STATUSES.approved)
+  end
+  
   class << self 
     STATUSES.each do |status_name|
       define_method "all_#{status_name}" do

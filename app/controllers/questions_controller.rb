@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /questions
   # GET /questions.json
   def index
@@ -112,14 +113,26 @@ class QuestionsController < ApplicationController
   end
   
    def random
+     if params[:auth_token]
+       reset_session
+     end
+
     @user = User.find(current_user)
     @question = Question.fresh(@user).active.random
-    
-    puts @question
     
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @question }
+    end
+    
+    def approve
+      @question=Question.find(params[:id])
+      @question.approve
+      
+      respond_to do |format|
+        format.html { redirect_to questions_url }
+        format.json { head :no_content }
+      end
     end
   end
   

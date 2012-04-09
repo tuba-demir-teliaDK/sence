@@ -12,9 +12,11 @@ Sence::Application.routes.draw do
     end
     member do
       get 'stats'
+      post :approve
     end
   end
 
+  
   devise_for :users,:controllers => {:sessions => "sessions",:registrations => "registrations"}
   
   resources :users do

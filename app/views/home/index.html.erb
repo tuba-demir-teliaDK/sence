@@ -7,6 +7,7 @@
     <%= link_to "<i class='icon-star icon-white'></i> #{t('My Questions')}".html_safe, mine_questions_path, :class=>'btn btn-large btn-warning' %>
     <%= link_to "<i class='icon-picture icon-white'></i> #{t("No Picture ("+@nopicture_count.to_s+")")}".html_safe, nopicture_questions_path, :class=>'btn btn-large btn-inverse' %>
     <%= link_to "<i class='icon-ok icon-white'></i> #{t("Waiting Approvals ("+@wapproval_count.to_s+")")}".html_safe, wapproval_questions_path, :class=>'btn btn-large btn-info' %>
+   <%= link_to "<i class='icon-remove'></i> #{t('Çıkış')}".html_safe, destroy_user_session_path, :method => :delete, :class=>'btn btn-large' %>
   </p>
 
   <b><%= @question_count %></b> questions,
