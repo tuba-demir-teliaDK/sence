@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
   
   scope :nopicture, where('opt1_image_file_name is null or opt2_image_file_name is null')
   scope :active, where("status='approved'")
-  scope :fresh, lambda { |user| joins('left outer join answers on questions.id=answers.question_id').where(['answers.user_id is null or answers.user_id != ?',user.id]) }
+  scope :fresh, lambda { |user| where('id not in (select distinct question_id from answers where user_id= ?)',user.id) }
   
   def capitalize_fields
     self.opt1=UnicodeUtils.titlecase(self.opt1)
