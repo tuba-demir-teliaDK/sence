@@ -32,7 +32,10 @@
                 	</ul>
 				</li>
 				<li><%=link_to "Answers", answers_path %></li>
-			</ul>  
+			</ul> 
+			<ul class="nav pull-right">
+               <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+            </ul> 
 			<%- end -%>
         </div>
       </div>
