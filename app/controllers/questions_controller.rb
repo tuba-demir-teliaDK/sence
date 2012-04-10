@@ -112,27 +112,28 @@ class QuestionsController < ApplicationController
     end
   end
   
-   def random
+  def random
      if params[:auth_token]
        reset_session
      end
-
+  
     @user = User.find(current_user)
-    @question = Question.fresh(@user).active.random
+    @question = Question.fresh(@user).active.pictured.random
     
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @question }
     end
+  end
     
-    def approve
-      @question=Question.find(params[:id])
-      @question.approve
-      
-      respond_to do |format|
-        format.html { redirect_to questions_url }
-        format.json { head :no_content }
-      end
+  def approve
+    @question=Question.find(params[:id])
+    @question.approve
+    
+    respond_to do |format|
+      flash[:notice] = 'Question approved'
+      format.html { redirect_to wapproval_questions_url }
+      format.json { head :no_content }
     end
   end
   

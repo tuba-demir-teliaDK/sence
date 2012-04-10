@@ -18,15 +18,13 @@ class Question < ActiveRecord::Base
   scope :nopicture, where('opt1_image_file_name is null or opt2_image_file_name is null')
   scope :active, where("status='approved'")
   scope :fresh, lambda { |user| where('id not in (select distinct question_id from answers where user_id= ?)',user.id) }
+  scope :pictured, where('opt1_image_file_name is not null and opt2_image_file_name is not null')
   
   def capitalize_fields
     self.opt1=UnicodeUtils.titlecase(self.opt1)
     self.opt2=UnicodeUtils.titlecase(self.opt2)
   end
   
-  def approve
-    self.update_attribute(:status,STATUSES.approved)
-  end
   
   class << self 
     STATUSES.each do |status_name|
@@ -41,6 +39,10 @@ class Question < ActiveRecord::Base
     define_method "#{status_name}?" do
       status == status_name 
     end
+  end
+  
+  def approve
+    self.update_attribute(:status,STATUSES[1])
   end
   
 end

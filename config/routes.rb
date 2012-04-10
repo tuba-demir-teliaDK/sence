@@ -11,6 +11,7 @@ Sence::Application.routes.draw do
       get 'wapproval' => 'questions#index'
     end
     member do
+      post :approve
       get 'stats'
     end
   end
