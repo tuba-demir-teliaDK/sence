@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
+  load_and_authorize_resource
   def index
     @answers = Answer.all
 

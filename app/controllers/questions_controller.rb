@@ -1,7 +1,9 @@
 class QuestionsController < ApplicationController
-  before_filter :authenticate_user!
   # GET /questions
   # GET /questions.json
+  load_and_authorize_resource
+  skip_authorize_resource :only => :random
+  
   def index
     
     if current_uri.include?('mine')

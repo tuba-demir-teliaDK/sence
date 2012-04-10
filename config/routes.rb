@@ -1,6 +1,5 @@
 Sence::Application.routes.draw do
   
-  
   resources :answers
 
   resources :questions do 
@@ -15,7 +14,6 @@ Sence::Application.routes.draw do
       get 'stats'
     end
   end
-
   
   devise_for :users,:controllers => {:sessions => "sessions",:registrations => "registrations"}
   

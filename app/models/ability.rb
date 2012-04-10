@@ -4,8 +4,10 @@ class Ability
   def initialize(user)
      if user.is? :admin
        can :manage, :all
-       puts 'admin'
+       puts 'adminnn'
      else
+       can [:read,:create], Question
+       can :create, Answer, :user_id => user.id
        puts 'user'
      end
      
