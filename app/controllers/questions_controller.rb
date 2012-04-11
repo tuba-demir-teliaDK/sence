@@ -129,7 +129,7 @@ class QuestionsController < ApplicationController
     end
   end
   
-  def approve
+  def image_migrate
     
     questions=Question.pictured
     strnotice="not migrated"
@@ -181,7 +181,7 @@ class QuestionsController < ApplicationController
       end
   end
     
-  def approved
+  def approve
     @question=Question.find(params[:id])
     @question.approve
     
