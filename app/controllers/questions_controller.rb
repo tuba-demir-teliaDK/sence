@@ -1,3 +1,4 @@
+require 'fileutils'
 class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
@@ -127,8 +128,60 @@ class QuestionsController < ApplicationController
       format.json { render json: @question }
     end
   end
-    
+  
   def approve
+    
+    questions=Question.pictured
+    strnotice="not migrated"
+    
+    questions.each do |question|
+      begin
+        filename=SecureRandom.hex(16)
+        qid=question.id.to_s
+        
+        from_path=Rails.root.to_s+'/public/system/opt1_images/'+qid+'/original/'+question.opt1_image_file_name
+        to_path=Rails.root.to_s+'/public/system/questions_images/'+filename+'_original.jpg'
+        FileUtils.cp(from_path, to_path)
+        
+        from_path=Rails.root.to_s+'/public/system/opt1_images/'+qid+'/medium/'+question.opt1_image_file_name
+        to_path=Rails.root.to_s+'/public/system/questions_images/'+filename+'_medium.jpg'
+        FileUtils.cp(from_path, to_path)
+        
+        from_path=Rails.root.to_s+'/public/system/opt1_images/'+qid+'/thumb/'+question.opt1_image_file_name
+        to_path=Rails.root.to_s+'/public/system/questions_images/'+filename+'_thumb.jpg'
+        FileUtils.cp(from_path, to_path)
+  
+        question.update_attribute(:opt1_image_file_name,filename+".jpg")
+        
+        filename=SecureRandom.hex(16)
+        from_path=Rails.root.to_s+'/public/system/opt2_images/'+qid+'/original/'+question.opt2_image_file_name
+        to_path=Rails.root.to_s+'/public/system/questions_images/'+filename+'_original.jpg'
+        FileUtils.cp(from_path, to_path)
+        
+        from_path=Rails.root.to_s+'/public/system/opt2_images/'+qid+'/medium/'+question.opt2_image_file_name
+        to_path=Rails.root.to_s+'/public/system/questions_images/'+filename+'_medium.jpg'
+        FileUtils.cp(from_path, to_path)
+        
+        from_path=Rails.root.to_s+'/public/system/opt2_images/'+qid+'/thumb/'+question.opt2_image_file_name
+        to_path=Rails.root.to_s+'/public/system/questions_images/'+filename+'_thumb.jpg'
+        FileUtils.cp(from_path, to_path)
+  
+        question.update_attribute(:opt2_image_file_name,filename+".jpg")
+        
+        puts "moved"+question.id.to_s
+        rescue => e
+          strnotice=strnotice+question.id.to_s+"-"
+          next
+        end
+    end
+      respond_to do |format|
+        flash[:notice] = strnotice
+        format.html { redirect_to wapproval_questions_url }
+        format.json { head :no_content }
+      end
+  end
+    
+  def approved
     @question=Question.find(params[:id])
     @question.approve
     

@@ -2,14 +2,30 @@ class Question < ActiveRecord::Base
   belongs_to :user
   
   #before_save :capitalize_fields
-  has_attached_file :opt1_image, :styles => { :medium => "180x180>", :thumb => "32x32>" },:default_url => '/assets/missing.png'
-  has_attached_file :opt2_image, :styles => { :medium => "180x180>", :thumb => "32x32>" },:default_url => '/assets/missing.png'
+  before_create :randomize_file_name
+  
+  has_attached_file :opt1_image, 
+                    :styles => { :medium => "180x180>", :thumb => "32x32>" },
+                    :default_url => '/assets/missing.png',
+                    :url=>"/system/:class_images/:basename_:style.:extension"
+  has_attached_file :opt2_image, 
+                    :styles => { :medium => "180x180>", :thumb => "32x32>" },
+                    :default_url => '/assets/missing.png',
+                    :url=>"/system/:class_images/:basename_:style.:extension"
   
   STATUSES = %w(wapproval approved deleted)
   
   validates_uniqueness_of :opt1, :scope => [:opt2]
   validates_presence_of :status , :opt1, :opt2
   validates_inclusion_of :status, :in => STATUSES
+  
+  def randomize_file_name
+    extension = File.extname(opt1_image_file_name).downcase
+    self.opt1_image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+    
+    extension = File.extname(opt2_image_file_name).downcase
+    self.opt2_image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+  end
   
   def user_email
     self.user.email if !self.user.nil?
