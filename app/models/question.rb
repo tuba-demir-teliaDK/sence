@@ -61,4 +61,23 @@ class Question < ActiveRecord::Base
     self.update_attribute(:status,STATUSES[1])
   end
   
+  
+  attr_accessor :cover_image_data
+  
+  before_validation :decode_cover_image_data, :if => :cover_image_data_provided?
+
+  def cover_image_data_provided?
+    !self.cover_image_data.blank?
+  end
+
+  def decode_cover_image_data
+    # If cover_image_data is set, decode it and hand it over to Paperclip
+    data = StringIO.new(Base64.decode64(self.cover_image_data))
+    data.class.class_eval { attr_accessor :original_filename, :content_type }
+    data.original_filename = "cover.png"
+    data.content_type = "image/png"
+    self.opt1_image = data
+  end
+  
+  
 end
