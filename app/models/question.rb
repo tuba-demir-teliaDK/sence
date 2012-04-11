@@ -20,11 +20,15 @@ class Question < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES
   
   def randomize_file_name
-    extension = File.extname(opt1_image_file_name).downcase
-    self.opt1_image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+    if !opt1_image_file_name.blank?
+      extension = File.extname(opt1_image_file_name).downcase
+      self.opt1_image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+    end
     
-    extension = File.extname(opt2_image_file_name).downcase
-    self.opt2_image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+    if !opt2_image_file_name.blank?
+      extension = File.extname(opt2_image_file_name).downcase
+      self.opt2_image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+    end
   end
   
   def user_email
@@ -62,21 +66,32 @@ class Question < ActiveRecord::Base
   end
   
   
-  attr_accessor :cover_image_data
+  attr_accessor :opt1_image_client,:opt2_image_client
   
-  before_validation :decode_cover_image_data, :if => :cover_image_data_provided?
+  before_validation :decode_client_images
 
   def cover_image_data_provided?
     !self.cover_image_data.blank?
   end
 
-  def decode_cover_image_data
+  def decode_client_images
     # If cover_image_data is set, decode it and hand it over to Paperclip
-    data = StringIO.new(Base64.decode64(self.cover_image_data))
-    data.class.class_eval { attr_accessor :original_filename, :content_type }
-    data.original_filename = "cover.png"
-    data.content_type = "image/png"
-    self.opt1_image = data
+    if !self.opt1_image_client.blank?
+      data = StringIO.new(Base64.decode64(self.opt1_image_client))
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = "cover.jpg"
+      data.content_type = "image/jpeg"
+      self.opt1_image = data
+    end
+    
+    if !self.opt2_image_client.blank?
+      data = StringIO.new(Base64.decode64(self.opt2_image_client))
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = "cover.jpg"
+      data.content_type = "image/jpeg"
+      self.opt2_image = data
+    end
+     
   end
   
   

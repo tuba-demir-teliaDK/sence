@@ -69,6 +69,10 @@ class QuestionsController < ApplicationController
   def create
     @user = User.find(current_user)
     @question = Question.new(params[:question])
+    
+    @question.opt1_image_client=params[:opt1_image_client]
+    @question.opt2_image_client=params[:opt2_image_client]
+    
     @question.user_id=@user.id
 
     respond_to do |format|
