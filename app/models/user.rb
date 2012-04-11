@@ -9,12 +9,16 @@ class User < ActiveRecord::Base
   
   has_many :questions
   has_many :answers
+  has_one  :profile
+  
+  accepts_nested_attributes_for :profile
   
   def ensure_authentication_token!   
     reset_authentication_token! if authentication_token.blank?   
   end 
 
-  before_save :ensure_authentication_token!  
+  before_save :ensure_authentication_token! 
+  after_create :create_profile
   
    #authorizations
   ROLES = %w[admin moderator author banned]

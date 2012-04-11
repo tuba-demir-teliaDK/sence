@@ -45,6 +45,8 @@ class AnswersController < ApplicationController
     @user = User.find(current_user)
     @answer.user_id=@user.id
     @question = Question.find(@answer.question_id)
+    profile=@user.profile
+    profile.points=(@user.profile.points).to_i+(@question.point)
     
     if @answer.opt==1
       @question.opt1_ac= (@question.opt1_ac).to_i + 1
@@ -56,8 +58,9 @@ class AnswersController < ApplicationController
       ActiveRecord::Base.transaction do
         @answer.save!
         @question.save!
+        profile.save!
         format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render json: @question.to_json(:only=> [:opt1_ac,:opt2_ac]), status: :created, location: @answer }
+        format.json { render json: [@question.to_json(:only=> [:opt1_ac,:opt2_ac]),profile.to_json(:only=>:points)], status: :created, location: @answer }
       end      
     end
     

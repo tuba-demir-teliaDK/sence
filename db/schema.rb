@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410080627) do
+ActiveRecord::Schema.define(:version => 20120411203717) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20120410080627) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "nickname"
+    t.float    "points",     :default => 0.0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "questions", :force => true do |t|
     t.string   "opt1"
@@ -41,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120410080627) do
     t.string   "opt2_image_content_type"
     t.integer  "opt2_image_file_size"
     t.datetime "opt2_image_updated_at"
+    t.integer  "point",                   :default => 5
   end
 
   add_index "questions", ["opt1", "opt2"], :name => "index_questions_on_opt1_and_opt2", :unique => true
@@ -63,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20120410080627) do
     t.datetime "updated_at",                             :null => false
     t.string   "apple_id"
     t.integer  "roles_mask"
+    t.string   "android_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

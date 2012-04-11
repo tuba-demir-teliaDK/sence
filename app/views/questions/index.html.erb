@@ -13,8 +13,8 @@
     <th>count</th>
     <th></th>
     <th>created by</th>
-    <th>status</th>
     <th>created_at</th>
+    <th>point</th>
     <th></th>
   </tr>
 </thead>
@@ -30,8 +30,8 @@
     <td><%= question.opt2_ac %> </td>
     <td><%= image_tag question.opt2_image.url(:thumb) %> </td>
     <td><%= question.user_email %> </td>
-    <td><%= question.status %> </td>
     <td><%= question.created_at %> </td>
+    <td><%= question.point %> </td>
     <td><%= link_to 'Show', question %> | <%= link_to 'Edit', edit_question_path(question) %> | 
     	<%= link_to 'Destroy', question,confirm: 'Are you sure musun?', method: :delete %> | 
     	<%- if question.status=='wapproval'%>

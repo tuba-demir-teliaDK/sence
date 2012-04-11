@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
   skip_authorize_resource :only => :random
   
   def index
-    
     if current_uri.include?('mine')
       @user=User.find(current_user)
       @questions = @user.questions
@@ -20,7 +19,6 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.all
     end
-    
 
     respond_to do |format|
       format.html # index.html.erb

@@ -19,6 +19,11 @@ class Question < ActiveRecord::Base
   validates_presence_of :status , :opt1, :opt2
   validates_inclusion_of :status, :in => STATUSES
   
+  scope :nopicture, where('opt1_image_file_name is null or opt2_image_file_name is null')
+  scope :active, where("status='approved'")
+  scope :fresh, lambda { |user| where('id not in (select distinct question_id from answers where user_id= ?)',user.id) }
+  scope :pictured, where('opt1_image_file_name is not null and opt2_image_file_name is not null')
+  
   def randomize_file_name
     if !opt1_image_file_name.blank?
       extension = File.extname(opt1_image_file_name).downcase
@@ -34,11 +39,6 @@ class Question < ActiveRecord::Base
   def user_email
     self.user.email if !self.user.nil?
   end
-  
-  scope :nopicture, where('opt1_image_file_name is null or opt2_image_file_name is null')
-  scope :active, where("status='approved'")
-  scope :fresh, lambda { |user| where('id not in (select distinct question_id from answers where user_id= ?)',user.id) }
-  scope :pictured, where('opt1_image_file_name is not null and opt2_image_file_name is not null')
   
   def capitalize_fields
     self.opt1=UnicodeUtils.titlecase(self.opt1)
