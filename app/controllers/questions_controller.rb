@@ -80,7 +80,7 @@ class QuestionsController < ApplicationController
         @question.save!
         profile.save!
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render json:{:id=>@question.id,:points=>profile.points}, status: :created, location: @question }
+        format.json { render json:{:id=>@question.id,:points_gained=>@question.points_for_create,:points=>profile.points}, status: :created, location: @question }
       end      
     end
     
