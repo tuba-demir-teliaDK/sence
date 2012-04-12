@@ -5,6 +5,7 @@
 <thead>
 	
   <tr>
+    <th>Functions</th>
     <th>ID </th>
     <th>Opt1</th>
     <th>count</th>
@@ -13,13 +14,17 @@
     <th>created by</th>
     <th>created_at</th>
     <th>point</th>
-    <th></th>
   </tr>
 </thead>
 <tbody>
 	
 <% @questions.each do |question| %>
   <tr>
+    <td><%= link_to "<i class='icon-share icon-black'></i>".html_safe, question, :title=> "Show" %>  
+    	<%= link_to "<i class='icon-edit icon-black'></i>".html_safe, edit_question_path(question), :title=> "Edit" %>  
+    	<%= link_to "<i class='icon-remove icon-black'></i>".html_safe, question,confirm: 'Are you sure musun?', method: :delete, :title=> "Delete" %> 
+    	<%= link_to "<i class='icon-ok icon-black'></i>".html_safe, approve_question_path(question), method: :post, :title=>"Approve" if question.status=='wapproval' %>
+    	</td>
     <td><%= question.id %></td>
     <td><%= question.opt1 %> </td>
     <td><%= question.opt1_ac %></td>
@@ -28,12 +33,6 @@
     <td><%= question.user_email %> </td>
     <td><%= question.created_at %> </td>
     <td><%= question.point %> </td>
-    <td><%= link_to 'Show', question %> | <%= link_to 'Edit', edit_question_path(question) %> | 
-    	<%= link_to 'Destroy', question,confirm: 'Are you sure musun?', method: :delete %> | 
-    	<%- if question.status=='wapproval'%>
-    		<%= link_to 'Approve', approve_question_path(question), method: :post %>
-    	<%- end %>
-    	</td>
   </tr>
 <% end %>
 </tbody>
