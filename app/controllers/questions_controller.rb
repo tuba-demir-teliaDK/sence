@@ -133,7 +133,7 @@ class QuestionsController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @question }
+      format.json { render json: @question.to_json(:only=>[:id,:opt1,:opt1_image_file_name,:opt2,:opt2_image_file_name,:point]) }
     end
   end
   
