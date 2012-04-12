@@ -67,6 +67,8 @@ class QuestionsController < ApplicationController
   def create
     @user = User.find(current_user)
     @question = Question.new(params[:question])
+    profile=@user.profile
+    profile.points=(@user.profile.points).to_i+(@question.points_for_create)
     
     @question.opt1_image_client=params[:opt1_image_client]
     @question.opt2_image_client=params[:opt2_image_client]
@@ -74,14 +76,18 @@ class QuestionsController < ApplicationController
     @question.user_id=@user.id
 
     respond_to do |format|
-      if @question.save
+      ActiveRecord::Base.transaction do
+        @question.save!
+        profile.save!
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render json: @question, status: :created, location: @question }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+        format.json { render json:{:id=>@question.id,:points=>profile.points}, status: :created, location: @question }
+      end      
     end
+    
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
+      format.html { render action: "new" }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+        
   end
 
   # PUT /questions/1

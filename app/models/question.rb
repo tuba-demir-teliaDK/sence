@@ -40,6 +40,7 @@ class Question < ActiveRecord::Base
     self.user.email if !self.user.nil?
   end
   
+  
   def capitalize_fields
     self.opt1=UnicodeUtils.titlecase(self.opt1)
     self.opt2=UnicodeUtils.titlecase(self.opt2)
@@ -67,6 +68,10 @@ class Question < ActiveRecord::Base
   
   
   attr_accessor :opt1_image_client,:opt2_image_client
+  
+  def points_for_create 
+    10
+  end
   
   before_validation :decode_client_images
 

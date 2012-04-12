@@ -21,7 +21,6 @@ Sence::Application.routes.draw do
   
   resources :users do
     resources :questions
-    resources :profiles
   end
 
   match 'logout' => 'devise/session#destroy'

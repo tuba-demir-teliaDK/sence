@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+     @profiles = Profile.all
 
     respond_to do |format|
       format.html # index.html.erb
