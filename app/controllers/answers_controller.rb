@@ -60,7 +60,9 @@ class AnswersController < ApplicationController
         @question.save!
         profile.save!
         format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render json: [@question.to_json(:only=> [:opt1_ac,:opt2_ac]),profile.to_json(:only=>:points)], status: :created, location: @answer }
+        #format.json { render json: [@question.to_json(:only=> [:opt1_ac,:opt2_ac]),profile.to_json(:only=>:points)], status: :created, location: @answer }
+        format.json { render json:{:opt1_ac=>@question.opt1_ac,:opt2_ac=>@question.opt2_ac,:points=>profile.points}, status: :created, location: @answer }
+      
       end      
     end
     
