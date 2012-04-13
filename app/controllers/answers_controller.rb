@@ -97,4 +97,17 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def history
+    @user = User.find(current_user)
+    
+    sql="select q.opt1,q.opt2,q.point,a.opt, a.created_at,q.opt1_ac, q.opt2_ac from questions q, answers a 
+         where q.id=a.question_id and a.user_id=? order by a.created_at asc"
+         
+    @answers = Answer.find_by_sql([sql,@user.id])
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @answers }
+      end
+  end
 end

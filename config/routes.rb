@@ -2,7 +2,11 @@ Sence::Application.routes.draw do
   
   resources :profiles
 
-  resources :answers
+  resources :answers do
+    collection do
+      get 'history' => 'answers#history'
+    end
+  end
 
   resources :questions do 
     collection do
