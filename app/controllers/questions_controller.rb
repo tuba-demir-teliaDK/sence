@@ -69,12 +69,8 @@ class QuestionsController < ApplicationController
     @question = Question.new(params[:question])
     profile=@user.profile
     profile.points=(@user.profile.points).to_i+(@question.points_for_create)
-    
-    @question.opt1_image_client=params[:opt1_image_client]
-    @question.opt2_image_client=params[:opt2_image_client]
-    
     @question.user_id=@user.id
-
+   
     respond_to do |format|
       ActiveRecord::Base.transaction do
         @question.save!
