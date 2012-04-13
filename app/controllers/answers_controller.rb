@@ -103,7 +103,7 @@ class AnswersController < ApplicationController
     @user = User.find(current_user)
     
     sql="select q.opt1,q.opt2,q.point,a.opt, a.created_at,q.opt1_ac, q.opt2_ac from questions q, answers a 
-         where q.id=a.question_id and a.user_id=? order by a.created_at asc"
+         where q.id=a.question_id and a.user_id=? order by a.created_at desc"
          
     @answers = Answer.find_by_sql([sql,@user.id])
       respond_to do |format|
