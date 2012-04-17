@@ -109,12 +109,7 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      if current_uri.include?('mine')
-        format.html { redirect_to mine_questions_url }
-      else
-        format.html { redirect_to questions_url }
-      end
-      
+      format.html { redirect_to questions_url }
       format.json { head :no_content }
     end
   end

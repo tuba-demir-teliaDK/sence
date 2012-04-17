@@ -1,7 +1,6 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   
-  
   @@points_for_create=10
   
   def points_for_create
@@ -75,26 +74,19 @@ class Question < ActiveRecord::Base
   
   attr_accessor :opt1_image_client
   attr_accessor :opt2_image_client
-  
-  #before_validation :decode_opt1
-  #before_validation :decode_opt2
 
   before_validation :decode_images
   
   def decode_images
     if !self.opt1_image_client.nil?
-      puts 'opt1_image_client_setted:'
-      
       data = StringIO.new(Base64.decode64(self.opt1_image_client))
       data.class.class_eval { attr_accessor :original_filename, :content_type }
       data.original_filename = "cover1.jpg"
       data.content_type = "image/jpeg"
       self.opt1_image = data
-      
     end
     
     if !self.opt2_image_client.nil?
-      puts 'opt2_image_client_setted:'
       data = StringIO.new(Base64.decode64(self.opt2_image_client))
       data.class.class_eval { attr_accessor :original_filename, :content_type }
       data.original_filename = "cover.jpg"

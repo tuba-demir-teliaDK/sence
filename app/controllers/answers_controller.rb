@@ -4,10 +4,28 @@ class AnswersController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => :history
   def index
-    @answers = Answer.all
+    if params[:user_id]
+      @user=User.find(params[:user_id])
+      @answers = @user.answers  
+    else
+      @answers = Answer.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @answers }
+    end
+  end
+  
+  def summary
+    sql="select u.id user_id,u.email,(select count(*) from answers where user_id=u.id) answer_count,
+     (select max(created_at) from answers where user_id=u.id) last_answer_date from users u"
+    
+    puts sql
+    @answers = Answer.find_by_sql(sql)
+
+    respond_to do |format|
+      format.html
       format.json { render json: @answers }
     end
   end
@@ -103,7 +121,7 @@ class AnswersController < ApplicationController
     @user = User.find(current_user)
     
     sql="select q.opt1,q.opt2,q.point,a.opt, a.created_at,q.opt1_ac, q.opt2_ac from questions q, answers a 
-         where q.id=a.question_id and a.user_id=? order by a.created_at desc"
+         where q.id=a.question_id and a.user_id=? order by a.created_at desc limit 50"
          
     @answers = Answer.find_by_sql([sql,@user.id])
       respond_to do |format|

@@ -5,6 +5,7 @@ Sence::Application.routes.draw do
   resources :answers do
     collection do
       get 'history' => 'answers#history'
+      get 'summary' => 'answers#summary'
     end
   end
 
@@ -25,6 +26,7 @@ Sence::Application.routes.draw do
   
   resources :users do
     resources :questions
+    resources :answers
   end
 
   match 'logout' => 'devise/session#destroy'
