@@ -1,6 +1,11 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   
+  has_many :category_questions
+  has_many :categories, :through => :category_questions
+ 
+  accepts_nested_attributes_for :category_questions, :allow_destroy => true
+  
   @@points_for_create=10
   
   def points_for_create

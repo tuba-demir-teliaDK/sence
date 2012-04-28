@@ -11,6 +11,12 @@
     </div>
   <% end %>
 <br />
+  <div class="control-group">
+  	<%= f.label 'Kategori:', :class=>"control-label" %>
+  		<%= f.fields_for :category_questions do |builder| %>
+ 			<%= builder.collection_select(:category_id, @categories, :id, :name) %>
+  		<% end %>
+  </div>
   <div class="field">
     <%= f.text_field :opt1, :class=>"span3", :placeholder=>"Seçenek 1..." %>
   	<%= f.file_field :opt1_image %>

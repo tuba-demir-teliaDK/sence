@@ -50,6 +50,8 @@ class QuestionsController < ApplicationController
   # GET /questions/new.json
   def new
     @question = Question.new
+    @question.category_questions.build
+    @categories= Category.all
 
     respond_to do |format|
       format.html # new.html.erb

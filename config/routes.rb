@@ -1,5 +1,9 @@
 Sence::Application.routes.draw do
   
+  resources :category_questions
+
+  resources :categories
+
   resources :profiles
 
   resources :answers do
