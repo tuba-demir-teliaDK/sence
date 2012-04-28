@@ -83,7 +83,7 @@ class Question < ActiveRecord::Base
   before_validation :decode_images
   
   def decode_images
-    if !self.opt1_image_client.nil?
+    if !self.opt1_image_client.nil? and !self.opt1_image_client.empty?
       data = StringIO.new(Base64.decode64(self.opt1_image_client))
       data.class.class_eval { attr_accessor :original_filename, :content_type }
       data.original_filename = "cover1.jpg"
@@ -91,7 +91,7 @@ class Question < ActiveRecord::Base
       self.opt1_image = data
     end
     
-    if !self.opt2_image_client.nil?
+    if !self.opt2_image_client.nil? and !self.opt2_image_client.empty?
       data = StringIO.new(Base64.decode64(self.opt2_image_client))
       data.class.class_eval { attr_accessor :original_filename, :content_type }
       data.original_filename = "cover.jpg"
