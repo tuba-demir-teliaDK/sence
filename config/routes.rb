@@ -31,9 +31,12 @@ Sence::Application.routes.draw do
   resources :users do
     resources :questions
     resources :answers
+    resources :profiles
   end
 
   match 'logout' => 'devise/session#destroy'
+  match 'myrank' => 'profiles#myrank'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -5,6 +5,7 @@
     <th>User</th>
     <th>Nickname</th>
     <th>Points</th>
+    <th>Rank</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,7 @@
     <td><%= profile.user_id %></td>
     <td><%= profile.nickname %></td>
     <td><%= profile.points %></td>
+    <td><%= profile.rank %></td>
     <td><%= link_to 'Show', profile %></td>
     <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
     <td><%= link_to 'Destroy', profile, confirm: 'Are you sure?', method: :delete %></td>

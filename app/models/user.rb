@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
     self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
   end
   
+ 
+  
   def roles
     ROLES.reject do |r|
       ((roles_mask || 0) & 2**ROLES.index(r)).zero?

@@ -80,4 +80,13 @@ class ProfilesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def myrank
+    @user = User.find(current_user)
+    profile=@user.profile
+    
+    respond_to do |format|
+      format.json { render json:{:rank=>profile.rank,:points=>profile.points,:higher=>profile.higher_ten.to_json(:only=>[:points]),:lower=>profile.lower_ten.to_json(:only=>[:points])}}
+    end
+  end
 end

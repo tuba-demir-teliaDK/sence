@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
     sql="select u.id user_id,u.email,(select count(*) from answers where user_id=u.id) answer_count,
      (select max(created_at) from answers where user_id=u.id) last_answer_date from users u"
     
-    puts sql
+    #puts sql
     @answers = Answer.find_by_sql(sql)
 
     respond_to do |format|
