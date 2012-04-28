@@ -63,22 +63,22 @@ class AnswersController < ApplicationController
     @answer = Answer.new(params[:answer])
     @user = User.find(current_user)
     @answer.user_id=@user.id
-    @question = Question.find(@answer.question_id)
+    question = Question.find(@answer.question_id)
     profile=@user.profile
     
     
-    opt1_count=(@question.opt1_ac).to_i
-    opt2_count=(@question.opt2_ac).to_i
+    opt1_count=(question.opt1_ac).to_i
+    opt2_count=(question.opt2_ac).to_i
     total_answers=opt1_count+opt2_count
     
     if @answer.opt==1
-      @question.opt1_ac= opt1_count+ 1
+      question.opt1_ac= opt1_count+ 1
     else
-      @question.opt2_ac= opt2_count+ 1
+      question.opt2_ac= opt2_count+ 1
     end
     
     message=""
-    points_gained=@question.point
+    points_gained=question.point
     
     if total_answers==0
       message="ilk cevap"
@@ -99,12 +99,12 @@ class AnswersController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.transaction do
         @answer.save!
-        @question.save!
+        question.save!
         profile.save!
         format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
         #format.json { render json: [@question.to_json(:only=> [:opt1_ac,:opt2_ac]),profile.to_json(:only=>:points)], status: :created, location: @answer }
         
-        format.json { render json:{:opt1_ac=>@question.opt1_ac,:opt2_ac=>@question.opt2_ac,:points_gained=>points_gained,:message=>message,:points=>profile.points}, status: :created, location: @answer }
+        format.json { render json:{:opt1_ac=>question.opt1_ac,:opt2_ac=>question.opt2_ac,:points_gained=>points_gained,:message=>message,:points=>profile.points}, status: :created, location: @answer }
       end      
     end
     
