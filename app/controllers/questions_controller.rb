@@ -170,7 +170,7 @@ class QuestionsController < ApplicationController
   
         question.update_attribute(:opt2_image_file_name,filename+".jpg")
         
-        puts "moved"+question.id.to_s
+        puts "moveds"+question.id.to_s
         rescue => e
           strnotice=strnotice+question.id.to_s+"-"
           next
