@@ -62,6 +62,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])
+    @categories= Category.all
   end
 
   # POST /questions
