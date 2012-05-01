@@ -2,9 +2,9 @@
   <h1>sence?dashboard</h1>
   <p>
   	
-    <%= link_to "<i class='icon-question-sign icon-white'></i> #{t('New Question')}".html_safe, new_question_path, :class=>'btn btn-large btn-primary' %>
-    <%= link_to "<i class='icon-random icon-white'></i> #{t('Random Question')}".html_safe, random_questions_path, :class=>'btn btn-large btn-success' %>
-    <%= link_to "<i class='icon-star icon-white'></i> #{t('My Questions')}".html_safe, mine_questions_path, :class=>'btn btn-large btn-warning' %>
+    <%= link_to "<i class='icon-question-sign icon-white'></i> #{t('New')}".html_safe, new_question_path, :class=>'btn btn-large btn-primary' %>
+    <%= link_to "<i class='icon-random icon-white'></i> #{t('Random')}".html_safe, random_questions_path, :class=>'btn btn-large btn-success' %>
+    <%= link_to "<i class='icon-star icon-white'></i> #{t('Mine')}".html_safe, mine_questions_path, :class=>'btn btn-large btn-warning' %>
     <%= link_to "<i class='icon-picture icon-white'></i> #{t("No Picture ("+@nopicture_count.to_s+")")}".html_safe, nopicture_questions_path, :class=>'btn btn-large btn-inverse' %>
     <%= link_to "<i class='icon-ok icon-white'></i> #{t("Waiting Approvals ("+@wapproval_count.to_s+")")}".html_safe, wapproval_questions_path, :class=>'btn btn-large btn-info' %>
   </p>
