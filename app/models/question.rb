@@ -27,7 +27,7 @@ class Question < ActiveRecord::Base
   
   STATUSES = %w(wapproval approved deleted)
   
-  validates_uniqueness_of :opt1, :scope => [:opt2]
+  #validates_uniqueness_of :opt1, :scope => [:opt2]
   validates_presence_of :status , :opt1, :opt2
   validates_inclusion_of :status, :in => STATUSES
   
