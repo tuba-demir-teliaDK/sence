@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428192334) do
+ActiveRecord::Schema.define(:version => 20120506162846) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20120428192334) do
     t.integer  "point",                   :default => 5
   end
 
-  add_index "questions", ["opt1", "opt2"], :name => "index_questions_on_opt1_and_opt2", :unique => true
   add_index "questions", ["status"], :name => "index_questions_on_status"
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
