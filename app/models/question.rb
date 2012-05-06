@@ -14,6 +14,7 @@ class Question < ActiveRecord::Base
   
   #before_save :capitalize_fields
   before_create :randomize_file_name
+  before_update :randomize_file_name
   
   has_attached_file :opt1_image, 
                     :styles => { :medium => "180x180>", :thumb => "32x32>" },
