@@ -14,7 +14,9 @@ class Question < ActiveRecord::Base
   
   #before_save :capitalize_fields
   before_create :randomize_file_name
-  before_update :randomize_file_name
+  #TODO: soru update ederken filename randomize edilmiyor. before_update eklendiğinde ise sadece text
+  #edit ediliginde veya tek 1 resim edildiğinde her 2 filename randomize ediliyor. diğer resim kayboluyor.
+  #before_update :randomize_file_name
   
   has_attached_file :opt1_image, 
                     :styles => { :medium => "180x180>", :thumb => "32x32>" },
