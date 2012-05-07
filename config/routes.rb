@@ -38,6 +38,7 @@ Sence::Application.routes.draw do
   match 'myrank' => 'profiles#myrank'
   match 'most' => 'statistics#most_answered'
   match 'gap' => 'statistics#gap'
+  match 'aomq' => 'statistics#aomq'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

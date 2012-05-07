@@ -4,9 +4,9 @@ class StatisticsController < ApplicationController
   authorize_resource :class => false  
   
   def most_answered
-    sql="select * from (select opt1_ac+opt2_ac tc,id,opt1,opt2,opt1_ac,opt2_ac from questions) x order by tc desc"
+    sql="select * from (select opt1_ac+opt2_ac tc,id,opt1,opt2,opt1_ac,opt2_ac from questions) x order by tc desc LIMIT 0, 10"
     
-    @mostanswered=Question.find_by_sql(sql).first
+    @mostanswered=Question.find_by_sql(sql)
   
     respond_to do |format|
       format.html # show.html.erb
@@ -15,8 +15,8 @@ class StatisticsController < ApplicationController
   end
   
   def gap
-    sql="select * from (select abs(((opt1_ac/opt1_ac+opt2_ac)*100)-((opt2_ac/opt1_ac+opt2_ac)*100)) tc,id,opt1,opt2,opt1_ac,opt2_ac from questions) x where tc<>100 order by tc desc"
-    @gap=Question.find_by_sql(sql).first
+    sql="select * from (select abs(((opt1_ac/opt1_ac+opt2_ac)*100)-((opt2_ac/opt1_ac+opt2_ac)*100)) tc,id,opt1,opt2,opt1_ac,opt2_ac from questions) x where tc<>100 order by tc desc LIMIT 0, 10"
+    @gap=Question.find_by_sql(sql)
   
     respond_to do |format|
       format.html # show.html.erb
