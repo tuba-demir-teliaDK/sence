@@ -9,9 +9,12 @@ class QuestionsController < ApplicationController
     if current_uri.include?('mine')
       @user=User.find(current_user)
       @questions = @user.questions
+      @@page_back="mine"
     elsif current_uri.include?('nopicture')
       @questions = Question.nopicture
+      @@page_back="nopicture"
     elsif current_uri.include?('wapproval')
+      @@page_back="wapproval"
       @questions = Question.all_wapproval
     elsif params[:user_id]
       @user=User.find(params[:user_id])
@@ -112,7 +115,16 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url }
+      if @@page_back=='wapproval'
+        format.html { redirect_to wapproval_questions_url }
+      elsif @@page_back=="nopicture"
+        format.html { redirect_to nopicture_questions_url }
+      elsif @@page_back=="mine"
+        format.html { redirect_to mine_questions_url }
+      else
+        format.html { redirect_to questions_url }
+      end
+      
       format.json { head :no_content }
     end
   end
