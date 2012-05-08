@@ -206,4 +206,14 @@ class QuestionsController < ApplicationController
     end
   end
   
+   def wimages
+   
+    @questions = Question.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @questions }
+    end
+  end
+  
 end

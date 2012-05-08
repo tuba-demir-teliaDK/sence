@@ -19,6 +19,7 @@ Sence::Application.routes.draw do
       get 'nopicture' => 'questions#index'
       get 'random'
       get 'wapproval' => 'questions#index'
+      get 'wimages'
     end
     member do
       post :approve

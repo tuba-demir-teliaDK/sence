@@ -1,0 +1,47 @@
+<%= link_to 'New Question', new_question_path , :class=>'btn btn-primary'%>
+<br />
+<h3>Questions</h3>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+<thead>
+	
+  <tr>
+    <th>Functions</th>
+    <th>ID </th>
+    <th>Opt1</th>
+    <th>Opt1 image</th>
+    <th>count</th>
+    <th>Opt2</th>
+    <th>Opt2 image</th>
+    <th>count</th>
+    <th>created by</th>
+    <th>created_at</th>
+    <th>point</th>
+  </tr>
+</thead>
+<tbody>
+	
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= link_to "<i class='icon-share icon-black'></i>".html_safe, question, :title=> "Show" %>  
+    	<%= link_to "<i class='icon-edit icon-black'></i>".html_safe, edit_question_path(question), :title=> "Edit" %>  
+    	<%= link_to "<i class='icon-remove icon-black'></i>".html_safe, question,confirm: 'Are you sure musun?', method: :delete, :title=> "Delete" %> 
+    	<%= link_to "<i class='icon-ok icon-black'></i>".html_safe, approve_question_path(question), method: :post, :title=>"Approve" if question.status=='wapproval' %>
+    	</td>
+    <td><%= question.id %></td>
+    <td><%= question.opt1 %> </td>
+    <td><%= image_tag question.opt1_image.url(:thumb) %> </td>
+    <td><%= question.opt1_ac %></td>
+    <td><%= question.opt2 %> </td>
+    <td><%= image_tag question.opt2_image.url(:thumb) %> </td>
+    <td><%= question.opt2_ac %> </td>
+    <td><%= question.user_email %> </td>
+    <td><%= question.created_at %> </td>
+    <td><%= question.point %> </td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Question', new_question_path %>
