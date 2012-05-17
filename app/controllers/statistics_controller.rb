@@ -1,9 +1,7 @@
 class StatisticsController < ApplicationController
-  # GET /questions
-  # GET /questions.json
-  authorize_resource :class => false  
   
   def most_answered
+    authorize! :statistic, :most_answered
     sql="select * from (select opt1_ac+opt2_ac tc,id,opt1,opt2,opt1_ac,opt2_ac from questions) x order by tc desc LIMIT 0, 10"
     
     @mostanswered=Question.find_by_sql(sql)
@@ -15,6 +13,7 @@ class StatisticsController < ApplicationController
   end
   
   def gap
+    authorize! :statistic, :gap
     sql="select * from (select abs(((opt1_ac/opt1_ac+opt2_ac)*100)-((opt2_ac/opt1_ac+opt2_ac)*100)) tc,id,opt1,opt2,opt1_ac,opt2_ac from questions) x where tc<>100 order by tc desc LIMIT 0, 10"
     @gap=Question.find_by_sql(sql)
   
@@ -25,6 +24,7 @@ class StatisticsController < ApplicationController
   end
   
   def aomq
+    authorize! :statistic, :aomq
     @user = User.find(current_user)
     sql="select * from questions where user_id=? order by created_at desc"
     

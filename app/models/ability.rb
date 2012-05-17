@@ -4,11 +4,14 @@ class Ability
   def initialize(user)
      if user.is? :admin
        can :manage, :all
-       puts 'adminnn'
+       #puts 'adminnn'
      else
        can [:read,:create], Question
        can :create, Answer, :user_id => user.id
-       puts 'user'
+       can :statistic, :most_answered
+       can :statistic, :gap
+       can :statistic, :aomq
+       #puts 'user'
      end
      
     # Define abilities for the passed in user here. For example:
